@@ -1,0 +1,43 @@
+/* CSS */
+.calculator__button {
+  align-items: center;
+  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+  animation: gradient 15s ease infinite;
+  background-size: 400% 400%;
+  color: white;
+  text-decoration: none;
+  cursor: pointer;
+
+  border: solid 1px white;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+
+
+.calculator__button:hover,
+.calculator__button:hover {
+  // background: rgb(131, 58, 180);
+  background: linear-gradient(-45deg, #ce5a37, #e03174, #1aa3d4, #1ad3a8);
+}
+
+.calculator__screen {
+  border-radius: 25px;
+  border: solid 3px white;
+  margin-bottom: 3%;
+  color: white;
+  min-height: 27vh;
+
+}

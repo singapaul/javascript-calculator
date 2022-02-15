@@ -2,23 +2,40 @@
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
+  width: 90vw;
+  height: 90vh;
+  padding: 0;
+  margin: 10% auto 10% auto;
+  justify-items: center;
+  align-items: center;
 
   &__screen {
-    background-color: aqua;
     grid-area: 1/1/3/5;
+    padding: 2%;
   }
 
 
 
   &__button {
+    height: 8vh;
+    max-width: 8vh;
+    min-width: 8vh;
+    border-radius: 50%;
+    font-size: 1em;
+    justify-content: center;
+    line-height: 1em;
+
     &--long {
+      height: 8vh;
+      max-width: 16vh;
+      min-width: 16vh;
       grid-area: 7/1/8/3;
-      background-color: black;
     }
 
   }
-
-
-
-
 }
+
+// 3. add the hover for the mouse
+// pick the fots 
+// pick the symbols
+// fix the sizes
