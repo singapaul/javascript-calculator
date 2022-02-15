@@ -8,6 +8,7 @@
   text-decoration: none;
   cursor: pointer;
 
+
   border: solid 1px white;
 }
 
@@ -29,7 +30,7 @@
 
 .calculator__button:hover,
 .calculator__button:hover {
-  // background: rgb(131, 58, 180);
+
   background: linear-gradient(-45deg, #ce5a37, #e03174, #1aa3d4, #1ad3a8);
 }
 
@@ -39,5 +40,6 @@
   margin-bottom: 3%;
   color: white;
   min-height: 27vh;
+
 
 }
