@@ -13,76 +13,83 @@ const equalsButton = document.querySelector(".calculator__button--equal");
 const resetButton = document.querySelector(".calculator__button--reset");
 // del button definition
 const delButton = document.querySelector(".calculator__button--del");
+// output to screen
+const printToScreen = document.querySelector("#calculator__screen-inputs");
+// output to result
+const resultToScreen = document.querySelector("#calculator__screen-result");
+
 
 // defining the variables 
 // Variable number 1
-let num1;
+let num1 = "";
 // variable numbe 2 
-var num2;
+let num2 = "";
 // operator;
-var operator;
-// operator to solve long digit issue 
-let a = [];
+let operator = "";
+// product
+let product = "";
+// 
 
 // 2. Functions
 
 const numberButtonClick = (evnt) => {
   // the below code takes the inputs and concatenates them into a single number
   // console.log(evnt);
-  let arrayValNum1 = evnt.target.innerText
-  num1 = arrayToNumber(arrayValNum1);
-  console.log(`The value of num1 is ${num1}`);
+  // let arrayValNum1 = evnt.target.innerText
+  // num1 = arrayToNumber(arrayValNum1);
+  let inputNum = (evnt.target.innerText);
+  console.log(`The value of num1 is ${inputNum}`);
+  // don't want to do it in function due to scoping
+  if (operator == "") {
+    num1 += inputNum;
+    printToScreen.innerHTML = num1;
+    console.log(`we have assigned num1 the value of ${num1}`);
+  } else {
+    num2 += inputNum;
+    printToScreen.innerHTML += num2;
+    console.log(`we have assigned num2 the value of ${num2}`);
+
+  }
 
 };
 
-// the below function tidies up the code for the above;
-const arrayToNumber = (evnt) => {
-  // the below code takes the inputs and concatenates them into a single number
-
-  console.log(evnt);
-  a.push(evnt);
-  // running total
-  const x = Number((a).join(""));
-  return x;
-};
-
-
-//  The below function will take a number and convert it into an array and remove the last value;
-
-const numberDeleteSingleDigit = (evnt) => {
-  // we will pass in the already defined num1;
-  let newArray = ("" + evnt).split("");
-  console.log(newArray);
-  // Trims the last value from the new array
-  let trimNum = newArray.pop();
-  return arrayToNumber(trimNum);
-  
-};
 
 const delButtonClick = () => {
   // const del = evnt.target;
-  console.log(`you pressed del button`);
-  // remember the num1 is the active number you are modifying: 
-  // num1 = 2131231;
-  // this will return a number;
-  // I have a value for num1, I want to convert it to a array, I want to pop the last digit, I want to convert it back into a number, this function should return num1 and console log its new value 
-  // num1 has a value we want to manipulate 
-  const num1Array = numberDeleteSingleDigit(num1);
+  // I need to both 1) cut the strings based on the IF statement within them: 
+  // 2) I need to trim the contents of the p tag
+  // 
 
 
 };
+
+
+
 
 
 
 // function for pressing an operator
 const operatorButtonClick = (evnt) => {
   operator = evnt.target.innerText;
-  console.log(`You pressed ${operator}`)
-  console.log(num1, num2);
-  num2 = num1;
-  console.log(num1, num2);
-  num1 = "";
-  console.log(num1, num2);
+  console.log(`You pressed ${operator}`);
+
+  num1 = printToScreen.innerHTML;
+  console.log(num1);
+  printToScreen.innerHTML += operator;
+
+
+
+  // num1 is delcared as a number
+  // operator is delcared 
+  // num2 is undeclared
+  // 
+
+
+  // console.log(num1, num2);
+  // num2 = num1;
+  // console.log(num1, num2);
+  // num1 = "";
+  // console.log(num1, num2);
 
 };
 
@@ -94,20 +101,68 @@ const equalsButtonClick = (evnt) => {
   // using if else, or switch
   // if oprator = x, then num1 * num2, sum or total equals
 
-  console.log(num1, num2, operator);
+  console.log(`your value of num1 is ${num1}, your value of num2 is ${num2}, your operator is ${operator}`);
   // do calculation which switchs
   // return product
   // reset variables
+  // num1 = "";
+  // num2 = "";
+  // operator = "";
+  console.log(num1, num2, operator);
+  console.log(typeof (num1), typeof (num2), typeof (operator));
+  num1 = parseFloat(num1);
+  console.log(typeof (num1));
+  num2 = parseFloat(num2);
+
+  // now time fo the switch statement
+  // new expression 
+
+  const opt = operator;
+  switch (opt) {
+    case '+':
+      product = num1 + num2;
+      console.log(product);
+      console.log(resultToScreen);
+      resultToScreen.innerHTML = product;
+      // return product;
+
+      break;
+    case '-':
+      product = num1 - num2;
+      console.log(product);
+      resultToScreen.innerHTML = product;
+      break;
+    case 'x':
+      product = num1 * num2;
+      console.log(product);
+      resultToScreen.innerHTML = product;
+      break;
+    case '/':
+      product = num1 / num2;
+      console.log(product);
+      resultToScreen.innerHTML = product;
+    default:
+      alert("you done broke me now")
+  };
   num1 = "";
   num2 = "";
+  product = "";
   operator = "";
-  console.log(num1, num2, operator);
+
 };
 
 // function for reset 
 const resetButtonClick = (evnt) => {
   const rst = evnt.target.innerText;
   console.log(`you pressed ${rst}`);
+  num1 = "";
+  // variable numbe 2 
+  num2 = "";
+  // operator;
+  operator = "";
+  // product
+  product = "";
+  console.log(num1, num2, operator)
 };
 
 // function for pressing del
@@ -153,4 +208,4 @@ delButton.addEventListener("click", delButtonClick);
 // 5 x 5 
 // 5/5
 
-// I need to define a new function which takes in a number 
+// I need to define a new function which takes in a number
