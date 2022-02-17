@@ -26,6 +26,7 @@ let operator = "";
 // product
 let product = "";
 // 
+let counter = "";
 
 // 2. Functions
 
@@ -57,69 +58,68 @@ const delButtonClick = () => {
   // 2) I need to trim the contents of the p tag
   console.log("you pressed delete")
 
-  // four cases 
-  // no numbers have a value
-  //1. you have num 1
-  //2. you have num 1 and oper
-  //3. you have num 1 and oper and num 2
-  //4. you have operator, no num 1 or num 2
-  //5. you have nothing in values
-  //6. you have multiple operators 
-
-
-  if (num1 !== 0 && num2 == 0 && operator == "") {
+  // scenario 1. where num1 has value, num2 blank, operator blank
+  if (num1 !== "" && num2 == "" && operator == "") {
     console.log(num1);
+    // This line removes the last value from num1, it redefines the string, from index 0 to 1 minus the final index
     num1 = num1.slice(0, -1);
     console.log(`The value of num1 is now ${num1}`);
     printToScreen.innerHTML = num1;
-  } else if (num1 !== 0 && num2 == 0 && operator !== "") {
-   
+    // scenario 2. where num1 has value, num2 blank, operator has value 
+  } else if (num1 !== "" && num2 == "" && operator !== "") {
+
     console.log(`The value of the operator is ${operator}`);
     operator = "";
     console.log(`The value of the operator is ${operator}`);
     printToScreen.innerHTML = " ";
-    printToScreen.innerHTML=num1;
-
-    // maybe just reprint and reset the screen with the value of num1? 
-    printToScreen.innerHTML -= operator
-  } else if (num1 !== 0 && num2 !== 0 && operator !== "") {
-   
-   console.log(num2);
-
-    printToScreen.innerHTML -= operator
+    printToScreen.innerHTML = num1;
+    // scenario 3. where num1 has value, num2 has value operator has value
+  } else if (num1 !== "" && num2 !== "" && operator !== "") {
+    console.log(num2);
+    // number 
+    num2 = num2.slice(0, -1);
+    console.log(`The value of num2 is now ${num2}`);
+    printToScreen.innerHTML = " ";
+    printToScreen.innerHTML = num1 + operator + num2;
+  } else if (num1 === "" && operator === "" && num2 === "") {
+    console.log("This button isn't doing anything")
+    // easter egg
+    counter = counter+1;
+    let counts = (counter.length);
+     if (counter.length > 10){
+       alert(`stop trying to break me! You've pressed me ${counts} times!`)
+     }
+  } else {
+    console.log("Edge case please fix")
   }
-
-
   // end of function 
 };
-
-
-
 
 
 
 // function for pressing an operator
 const operatorButtonClick = (evnt) => {
   operator = evnt.target.innerText;
-  console.log(`You pressed ${operator}`);
+  console.log(`You pressed ${operator} `);
 
-  num1 = printToScreen.innerHTML;
+
+  // num1 = printToScreen.innerHTML;
   console.log(num1);
   printToScreen.innerHTML += operator;
+// we use if statement here :
+// if operator is blankwe won't use a switch statement, we will use IF logic 
 
 
 
-  // num1 is delcared as a number
-  // operator is delcared 
-  // num2 is undeclared
-  // 
 
 
-  // console.log(num1, num2);
-  // num2 = num1;
-  // console.log(num1, num2);
-  // num1 = "";
-  // console.log(num1, num2);
+  // need iF logic here 
+  // display logics
+  // So if there is no operator defined, we want to push the operator onto the screen and define it, if one is already defined, we want to refine it. 
+  // we can later expand this logic and push more operators onto the screen when we calculate product = num1 x product ;
+
+
+
 
 };
 
