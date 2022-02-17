@@ -1,6 +1,3 @@
-// alert("Half life part 3 coming soon!")
-
-
 // 1. Constants - where we fetch the buttons 
 
 // number buttons definition 
