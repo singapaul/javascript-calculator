@@ -84,11 +84,11 @@ const delButtonClick = () => {
   } else if (num1 === "" && operator === "" && num2 === "") {
     console.log("This button isn't doing anything")
     // easter egg
-    counter = counter+1;
+    counter = counter + 1;
     let counts = (counter.length);
-     if (counter.length > 10){
-       alert(`stop trying to break me! You've pressed me ${counts} times!`)
-     }
+    if (counter.length > 10) {
+      alert(`stop trying to break me! You've pressed me ${counts} times!`)
+    }
   } else {
     console.log("Edge case please fix")
   }
@@ -101,26 +101,49 @@ const delButtonClick = () => {
 const operatorButtonClick = (evnt) => {
   operator = evnt.target.innerText;
   console.log(`You pressed ${operator} `);
-
-
   // num1 = printToScreen.innerHTML;
-  console.log(num1);
-  printToScreen.innerHTML += operator;
-// we use if statement here :
-// if operator is blankwe won't use a switch statement, we will use IF logic 
+  // console.log(num1);
+console.log(num1,num2)
+if(num1==""){
+  printToScreen.innerHTML = "";
+}
+else if (num1 !=="" && num2 ==""){
+  printToScreen.innerHTML = "";
+  printToScreen.innerHTML = num1 + operator;
+}
+// else if (num1 !=="" && num2!=="" && product !==""){
+//   printToScreen.innerHTML ="";
+//   printToScreen.innerHTML = num1 + operator + num2+ operator;
+// }
+else {console.log("edge case")}
 
 
+  
 
+  // we use if statement here :
+  // if operator is blank we won't use a switch statement, we will use IF logic 
+  // if (num1 == "") {
+  //   console.log(operator);
+  //   operator = "";
+  //   console.log(operator);
+  //   // most typical scenario
+  // } else if (num1 !== "" && num2 == "") {
+  //   console.log("hot potato")
+  //   printToScreen.innerHTML += operator;
+  // }
 
+  // if the operator already has a value
+  // else if (operator !== "") {
+  //   operator = evnt.target.innerText;
+  //   console.log(operator);
+  // } else {
+  //   console.log("hi")
+  // }
 
   // need iF logic here 
   // display logics
   // So if there is no operator defined, we want to push the operator onto the screen and define it, if one is already defined, we want to refine it. 
-  // we can later expand this logic and push more operators onto the screen when we calculate product = num1 x product ;
-
-
-
-
+  // we can later expand this logic and push more operators onto the screen when we calculate product = num1 x product 
 };
 
 // function for equals

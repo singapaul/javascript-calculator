@@ -210,13 +210,6 @@
 // }
 
 
-var str= "Hello TecAdmin!";
-var newStr = str.substring(0, str.length - 1);
-console.log(str)
-console.log(newStr);
-
-1
-2
 var strp = "Hello TecAdmin!";
 var newStrp = strp.slice(0, -1);
 console.log(strp)
