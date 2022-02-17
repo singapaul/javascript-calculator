@@ -174,37 +174,50 @@
 // // };
 
 
-// switch case: 
-console.log("start of switch expression")
-const expr = 'Mangoesss';
-switch (expr) {
-  case 'Oranges':
-    console.log('Oranges are $0.59 a pound.');
-    break;
-  case 'Mangoes':
-  case 'Papayas':
-    console.log('Mangoes and papayas are $2.79 a pound.');
-    // expected output: "Mangoes and papayas are $2.79 a pound."
-    break;
-  default:
-    console.log(`Sorry, we are out of ${expr}.`);
+// // switch case: 
+// console.log("start of switch expression")
+// const expr = 'Mangoesss';
+// switch (expr) {
+//   case 'Oranges':
+//     console.log('Oranges are $0.59 a pound.');
+//     break;
+//   case 'Mangoes':
+//   case 'Papayas':
+//     console.log('Mangoes and papayas are $2.79 a pound.');
+//     // expected output: "Mangoes and papayas are $2.79 a pound."
+//     break;
+//   default:
+//     console.log(`Sorry, we are out of ${expr}.`);
 
 
-};
+// };
 
-// new expression 
-var num1 = 2;
-var num2 = 3;
-let operator = '+'
-const opt = operator;
-switch (opt) {
-  case '+':
-    console.log(num1 + num2);
-    break;
-  case '-':
-    console.log(num1 - 2);
-    break;
-  default:
-    console.log("awakward");
+// // new expression 
+// var num1 = 2;
+// var num2 = 3;
+// let operator = '+'
+// const opt = operator;
+// switch (opt) {
+//   case '+':
+//     console.log(num1 + num2);
+//     break;
+//   case '-':
+//     console.log(num1 - 2);
+//     break;
+//   default:
+//     console.log("awakward");
 
-}
+// }
+
+
+var str= "Hello TecAdmin!";
+var newStr = str.substring(0, str.length - 1);
+console.log(str)
+console.log(newStr);
+
+1
+2
+var strp = "Hello TecAdmin!";
+var newStrp = strp.slice(0, -1);
+console.log(strp)
+console.log(newStrp);

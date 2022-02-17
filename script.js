@@ -35,7 +35,7 @@ const numberButtonClick = (evnt) => {
   // let arrayValNum1 = evnt.target.innerText
   // num1 = arrayToNumber(arrayValNum1);
   let inputNum = (evnt.target.innerText);
-  console.log(`The value of num1 is ${inputNum}`);
+  console.log(`The input pressed is ${inputNum}`);
   // don't want to do it in function due to scoping
   if (operator == "") {
     num1 += inputNum;
@@ -55,9 +55,42 @@ const delButtonClick = () => {
   // const del = evnt.target;
   // I need to both 1) cut the strings based on the IF statement within them: 
   // 2) I need to trim the contents of the p tag
-  // 
+  console.log("you pressed delete")
+
+  // four cases 
+  // no numbers have a value
+  //1. you have num 1
+  //2. you have num 1 and oper
+  //3. you have num 1 and oper and num 2
+  //4. you have operator, no num 1 or num 2
+  //5. you have nothing in values
+  //6. you have multiple operators 
 
 
+  if (num1 !== 0 && num2 == 0 && operator == "") {
+    console.log(num1);
+    num1 = num1.slice(0, -1);
+    console.log(`The value of num1 is now ${num1}`);
+    printToScreen.innerHTML = num1;
+  } else if (num1 !== 0 && num2 == 0 && operator !== "") {
+   
+    console.log(`The value of the operator is ${operator}`);
+    operator = "";
+    console.log(`The value of the operator is ${operator}`);
+    printToScreen.innerHTML = " ";
+    printToScreen.innerHTML=num1;
+
+    // maybe just reprint and reset the screen with the value of num1? 
+    printToScreen.innerHTML -= operator
+  } else if (num1 !== 0 && num2 !== 0 && operator !== "") {
+   
+   console.log(num2);
+
+    printToScreen.innerHTML -= operator
+  }
+
+
+  // end of function 
 };
 
 
@@ -135,13 +168,14 @@ const equalsButtonClick = (evnt) => {
       resultToScreen.innerHTML = product;
       break;
     case '/':
-      product = (num1/num2);
+      product = (num1 / num2);
       console.log(product);
       resultToScreen.innerHTML = product;
       break;
     default:
       alert("you done broke me now")
   };
+
   num1 = "";
   num2 = "";
   product = "";
@@ -165,12 +199,6 @@ const resetButtonClick = (evnt) => {
   resultToScreen.innerHTML = " ";
 
 };
-
-// function for pressing del
-
-
-
-
 
 
 // 3. Logic Execution 
