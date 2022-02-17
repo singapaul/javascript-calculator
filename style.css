@@ -10,6 +10,7 @@
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
   width: 90vw;
+  max-width: 600px;
   height: 90vh;
   padding: 3%;
   margin: 10% auto 10% auto;
@@ -51,6 +52,7 @@
   color: white;
   text-decoration: none;
   cursor: pointer;
+  font-family: "Poppins", sans-serif;
   border: solid 1px white;
 }
 
@@ -106,4 +108,12 @@ body {
   100% {
     background-position: 0% 50%;
   }
+}
+.calculator__button--number {
+  font-family: "Poppins", sans-serif;
+}
+
+.calculator__screen p {
+  font-family: "Poppins", sans-serif;
+  font-size: 2em;
 }
