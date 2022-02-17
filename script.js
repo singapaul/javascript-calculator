@@ -135,9 +135,10 @@ const equalsButtonClick = (evnt) => {
       resultToScreen.innerHTML = product;
       break;
     case '/':
-      product = num1 / num2;
+      product = (num1/num2);
       console.log(product);
       resultToScreen.innerHTML = product;
+      break;
     default:
       alert("you done broke me now")
   };
@@ -159,7 +160,10 @@ const resetButtonClick = (evnt) => {
   operator = "";
   // product
   product = "";
-  console.log(num1, num2, operator)
+  console.log(num1, num2, operator);
+  printToScreen.innerHTML = " ";
+  resultToScreen.innerHTML = " ";
+
 };
 
 // function for pressing del
