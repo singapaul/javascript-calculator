@@ -57,24 +57,42 @@ hr {
 }
 
 .footer {
-  height: 5vh;
+  position: absolute;
+  bottom: 20px;
+  left: 5%;
+  right: 5%;
+  width: 90%;
 }
 .footer-contents {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  padding: 0 10%;
   color: white;
   font-family: "Poppins", sans-serif;
+  padding: 0 5%;
 }
 
 a {
   text-decoration: none;
   color: white;
-  padding: 0 10px;
+  padding: 0;
 }
 
+h1 {
+  visibility: hidden;
+  color: white;
+  font-family: "Poppins", sans-serif;
+  position: absolute;
+  top: 3%;
+  left: 5%;
+}
+
+@media only screen and (min-width: 600px) {
+  h1 {
+    visibility: visible;
+  }
+}
 /* CSS */
 .calculator__button {
   align-items: center;

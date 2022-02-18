@@ -177,6 +177,12 @@ const equalsButtonClick = (evnt) => {
   console.log(typeof (num1));
   num2 = parseFloat(num2);
 
+// In the case I want to keep calculating, and I have entered = a second/third/fourth time, I want to output my result
+
+
+
+
+
 
 // Switch statement
   const opt = operator;
