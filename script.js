@@ -35,16 +35,9 @@ secondOperatorSwitch = false;
 // 2. Functions
 
 const numberButtonClick = (evnt) => {
-  // the below code takes the inputs and concatenates them into a single number
-  // console.log(evnt);
-  // let arrayValNum1 = evnt.target.innerText
-  // num1 = arrayToNumber(arrayValNum1);
+
   let inputNum = (evnt.target.innerText);
   console.log(`The input pressed is ${inputNum}`);
-  // don't want to do it in function due to scoping
-
-  // restructuring the if statement 
-
 
   // case 1. No operator = blank, putting num1 in 
   if (operator == "" && Continueflag == false) {
@@ -65,16 +58,19 @@ const numberButtonClick = (evnt) => {
   else if (num1 !== "" && num2 == "" && operator == "" && Continueflag == true) {
     console.log("scenario 4");
     // we are fine with this, we actually don't want anything to happen
-    
+
   }
   //case 5. we are continuining after initial calculation, num1 is assigned value of product, num2 = blank, operator is full, continue flag is true;
-  else if (num1 !== "" && num2 == "" && operator !== "" && Continueflag == true) {
+  else if (num1 !== "" && secondOperatorSwitch == false && operator !== "" && Continueflag == true) {
     console.log("scenario 5");
+    num2+=inputNum;
+    console.log(num2);
+    printToScreen.innerHTML+=num2;
+    console.log(num1,num2, operator, secondOperatorSwitch, Continueflag)
     // here we want to remove brackets and add them and reshow the display
+    //will also need another flag here to show that operator is down
   }
-
 };
-
 
 // function for pressing an operator
 const operatorButtonClick = (evnt) => {
@@ -84,23 +80,32 @@ const operatorButtonClick = (evnt) => {
   // console.log(num1);
   console.log(num1, num2)
   console.log(Continueflag);
-  if (Continueflag == true) {
-    secondOperatorSwitch = true
-  };
 
+  console.log(`the state of the continue flag is  ${Continueflag}`);
+  console.log(`the state of the operator switch is  ${secondOperatorSwitch}`)
+
+  // We are assignign the operator a value here, so it will always have a value, however we can use our two switches
+  // Scenario 1 num1 no value, num2 has no value (by extension) and we are not continuining from a previous sum
   if (num1 == "" && Continueflag == false) {
     printToScreen.innerHTML = "";
-  } else if (num1 !== "" && num2 == "" && Continueflag == false) {
+    console.log("scenario1")
+  }
+  // Scenario 2 num 1 has a value, num2 has no value and we are not continuining from a previous sum
+  else if (num1 !== "" && num2 == "" && Continueflag == false) {
+    console.log("scenario2");
     printToScreen.innerHTML = "";
     printToScreen.innerHTML = num1 + operator;
-  } else if (Continueflag == true && secondOperatorSwitch == true) {
-    console.log("HI THE flag worked");
-    console.log(`The value of num1 is ${num1}`);
-    console.log(`The value of num2 is ${num2}`);
-    console.log(`The value of product is ${product}`);
-    console.log(`The value of operator is ${operator}`);
+  }
+  //scenario 3
+  else if (num1 !== "" && num2 == "" && Continueflag == true &&secondOperatorSwitch==true) {
+    console.log("we are continuining down this line of logic");
+
     printToScreen.innerHTML += operator;
+    console.log(secondOperatorSwitch);
     secondOperatorSwitch = false;
+    console.log(secondOperatorSwitch);
+    console.log(Continueflag);
+    console.log(num1, num2, operator);
 
   }
   // else if (num1 !=="" && num2!=="" && product !==""){
@@ -110,39 +115,11 @@ const operatorButtonClick = (evnt) => {
   else {
     console.log("edge case")
   }
-  // we use if statement here :
-  // if operator is blank we won't use a switch statement, we will use IF logic 
-  // if (num1 == "") {
-  //   console.log(operator);
-  //   operator = "";
-  //   console.log(operator);
-  //   // most typical scenario
-  // } else if (num1 !== "" && num2 == "") {
-  //   console.log("hot potato")
-  //   printToScreen.innerHTML += operator;
-  // }
-
-  // if the operator already has a value
-  // else if (operator !== "") {
-  //   operator = evnt.target.innerText;
-  //   console.log(operator);
-  // } else {
-  //   console.log("hi")
-  // }
-
-  // need iF logic here 
-  // display logics
-  // So if there is no operator defined, we want to push the operator onto the screen and define it, if one is already defined, we want to refine it. 
-  // we can later expand this logic and push more operators onto the screen when we calculate product = num1 x product 
 };
 
 
 
-
 const delButtonClick = () => {
-  // const del = evnt.target;
-  // I need to both 1) cut the strings based on the IF statement within them: 
-  // 2) I need to trim the contents of the p tag
   console.log("you pressed delete")
 
   // scenario 1. where num1 has value, num2 blank, operator blank
@@ -174,7 +151,8 @@ const delButtonClick = () => {
     counter = counter + 1;
     let counts = (counter.length);
     if (counter.length > 10) {
-      alert(`stop trying to break me! You've pressed me ${counts} times!`)
+      alert(`stop trying to break me! You've pressed me ${counts} times!`);
+      counter = 0;
     }
   } else {
     console.log("Edge case please fix")
@@ -192,21 +170,15 @@ const equalsButtonClick = (evnt) => {
   // if oprator = x, then num1 * num2, sum or total equals
 
   console.log(`your value of num1 is ${num1}, your value of num2 is ${num2}, your operator is ${operator}`);
-  // do calculation which switchs
-  // return product
-  // reset variables
-  // num1 = "";
-  // num2 = "";
-  // operator = "";
+// Converting the strings to numbers
   console.log(num1, num2, operator);
   console.log(typeof (num1), typeof (num2), typeof (operator));
   num1 = parseFloat(num1);
   console.log(typeof (num1));
   num2 = parseFloat(num2);
 
-  // now time fo the switch statement
-  // new expression 
 
+// Switch statement
   const opt = operator;
   switch (opt) {
     case '+':
@@ -243,7 +215,7 @@ const equalsButtonClick = (evnt) => {
       console.log("result already computed")
   };
 
-  // maybe I want to refine these seperately
+  // maybe I want to redefine these seperately
   num1 = product;
   Continueflag = true;
   console.log(num1);
@@ -251,6 +223,7 @@ const equalsButtonClick = (evnt) => {
   product = "";
   num2 = ""
   operator = "";
+  secondOperatorSwitch = true;
 
 };
 
