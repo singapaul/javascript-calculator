@@ -214,3 +214,13 @@ var strp = "Hello TecAdmin!";
 var newStrp = strp.slice(0, -1);
 console.log(strp)
 console.log(newStrp);
+
+
+
+// Add event listener on keyup
+document.addEventListener('keyup', (event) => {
+  var name = event.key;
+  var code = event.code;
+  // Alert the key name and key code on keydown
+  alert(`Key pressed ${name}  Key code value: ${code}`);
+}, false);

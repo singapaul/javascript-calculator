@@ -43,31 +43,100 @@ const numberButtonClick = (evnt) => {
   console.log(`The input pressed is ${inputNum}`);
   // don't want to do it in function due to scoping
 
-  if (num1 !== "" && num2 == "" && operator !== "" && Continueflag == true) {
-    console.log("on the right path");
-    printToScreen.innerHTML += inputNum;
-    num2 = inputNum;
-    console.log(num1);
-    console.log(num2);
-    console.log(operator);
-  } else if (operator !== "" && num2 == "" && num1 !== "" && Continueflag == false) {
-    console.log("fixing the initial bug");
-    printToScreen.innerHTML += inputNum;
-    num2 = inputNum;
+  // restructuring the if statement 
 
-  } else if (operator == "") {
+
+  // case 1. No operator = blank, putting num1 in 
+  if (operator == "" && Continueflag == false) {
+    console.log("on num1 path")
     num1 += inputNum;
     printToScreen.innerHTML = num1;
     console.log(`we have assigned num1 the value of ${num1}`);
-  } else if (num1 == "", num2 !== "", operator !== "") {
-    resetButtonClick(evnt);
-  } else {
+    //case 2. Num1 has value, operator has value, put num2 in
+  } else if (operator !== "" && num1 !== "" && Continueflag == false) {
     num2 += inputNum;
     printToScreen.innerHTML = num1 + operator + num2;
     console.log(`we have assigned num2 the value of ${num2}`);
+    // case 3. num 1 and num2 unassigned dont print operator (might need to add a flag in later)
+  } else if (operator !== "" && num1 == "" && num2 == "" && Continueflag == false) {
+    resetButtonClick(evnt);
+  }
+  // case 4. we are continuining after initial calculation, num1 is assigned value of product, num2 = blank, operator is blank, continue flag is true;
+  else if (num1 !== "" && num2 == "" && operator == "" && Continueflag == true) {
+    console.log("scenario 4");
+    // we are fine with this, we actually don't want anything to happen
+    
+  }
+  //case 5. we are continuining after initial calculation, num1 is assigned value of product, num2 = blank, operator is full, continue flag is true;
+  else if (num1 !== "" && num2 == "" && operator !== "" && Continueflag == true) {
+    console.log("scenario 5");
+    // here we want to remove brackets and add them and reshow the display
   }
 
 };
+
+
+// function for pressing an operator
+const operatorButtonClick = (evnt) => {
+  operator = evnt.target.innerText;
+  console.log(`You pressed ${operator} `);
+  // num1 = printToScreen.innerHTML;
+  // console.log(num1);
+  console.log(num1, num2)
+  console.log(Continueflag);
+  if (Continueflag == true) {
+    secondOperatorSwitch = true
+  };
+
+  if (num1 == "" && Continueflag == false) {
+    printToScreen.innerHTML = "";
+  } else if (num1 !== "" && num2 == "" && Continueflag == false) {
+    printToScreen.innerHTML = "";
+    printToScreen.innerHTML = num1 + operator;
+  } else if (Continueflag == true && secondOperatorSwitch == true) {
+    console.log("HI THE flag worked");
+    console.log(`The value of num1 is ${num1}`);
+    console.log(`The value of num2 is ${num2}`);
+    console.log(`The value of product is ${product}`);
+    console.log(`The value of operator is ${operator}`);
+    printToScreen.innerHTML += operator;
+    secondOperatorSwitch = false;
+
+  }
+  // else if (num1 !=="" && num2!=="" && product !==""){
+  //   printToScreen.innerHTML ="";
+  //   printToScreen.innerHTML = num1 + operator + num2+ operator;
+  // }
+  else {
+    console.log("edge case")
+  }
+  // we use if statement here :
+  // if operator is blank we won't use a switch statement, we will use IF logic 
+  // if (num1 == "") {
+  //   console.log(operator);
+  //   operator = "";
+  //   console.log(operator);
+  //   // most typical scenario
+  // } else if (num1 !== "" && num2 == "") {
+  //   console.log("hot potato")
+  //   printToScreen.innerHTML += operator;
+  // }
+
+  // if the operator already has a value
+  // else if (operator !== "") {
+  //   operator = evnt.target.innerText;
+  //   console.log(operator);
+  // } else {
+  //   console.log("hi")
+  // }
+
+  // need iF logic here 
+  // display logics
+  // So if there is no operator defined, we want to push the operator onto the screen and define it, if one is already defined, we want to refine it. 
+  // we can later expand this logic and push more operators onto the screen when we calculate product = num1 x product 
+};
+
+
 
 
 const delButtonClick = () => {
@@ -113,76 +182,6 @@ const delButtonClick = () => {
   // end of function 
 };
 
-
-
-// function for pressing an operator
-const operatorButtonClick = (evnt) => {
-  operator = evnt.target.innerText;
-  console.log(`You pressed ${operator} `);
-  // num1 = printToScreen.innerHTML;
-  // console.log(num1);
-  console.log(num1, num2)
-  console.log(Continueflag);
-if (Continueflag == true){
-  secondOperatorSwitch = true
-}
-
-
-  if (num1 == "" && Continueflag == false) {
-    printToScreen.innerHTML = "";
-  } else if (num1 !== "" && num2 == "" && Continueflag == false) {
-    printToScreen.innerHTML = "";
-    printToScreen.innerHTML = num1 + operator;
-  } else if (Continueflag == true && secondOperatorSwitch ==true) {
-    console.log("HI THE flag worked");
-    console.log(`The value of num1 is ${num1}`);
-    console.log(`The value of num2 is ${num2}`);
-    console.log(`The value of product is ${product}`);
-    console.log(`The value of operator is ${operator}`);
-    printToScreen.innerHTML += operator;
-    secondOperatorSwitch = false; 
-
-
-
-
-
-  }
-  // else if (num1 !=="" && num2!=="" && product !==""){
-  //   printToScreen.innerHTML ="";
-  //   printToScreen.innerHTML = num1 + operator + num2+ operator;
-  // }
-  else {
-    console.log("edge case")
-  }
-
-
-
-
-  // we use if statement here :
-  // if operator is blank we won't use a switch statement, we will use IF logic 
-  // if (num1 == "") {
-  //   console.log(operator);
-  //   operator = "";
-  //   console.log(operator);
-  //   // most typical scenario
-  // } else if (num1 !== "" && num2 == "") {
-  //   console.log("hot potato")
-  //   printToScreen.innerHTML += operator;
-  // }
-
-  // if the operator already has a value
-  // else if (operator !== "") {
-  //   operator = evnt.target.innerText;
-  //   console.log(operator);
-  // } else {
-  //   console.log("hi")
-  // }
-
-  // need iF logic here 
-  // display logics
-  // So if there is no operator defined, we want to push the operator onto the screen and define it, if one is already defined, we want to refine it. 
-  // we can later expand this logic and push more operators onto the screen when we calculate product = num1 x product 
-};
 
 // function for equals
 const equalsButtonClick = (evnt) => {
@@ -234,8 +233,8 @@ const equalsButtonClick = (evnt) => {
       resultToScreen.innerHTML = product;
       break;
 
-      case '%':
-      product = ((num1 / num2)*100)
+    case '%':
+      product = ((num1 / num2) * 100)
       console.log(product);
       resultToScreen.innerHTML = product;
       break;
