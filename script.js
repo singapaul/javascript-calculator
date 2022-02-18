@@ -178,8 +178,15 @@ const equalsButtonClick = (evnt) => {
   num2 = parseFloat(num2);
 
 // In the case I want to keep calculating, and I have entered = a second/third/fourth time, I want to output my result
-
-
+if (num1 !=="" && num2!=="" && operator!=="" && secondOperatorSwitch ==false && Continueflag==true){
+  console.log("HFEOIHHWEFOIHOEFHOEIFOWEIFHEFOIWEFEOW")
+  console.log(num1);
+  console.log(num2);
+  console.log(operator);
+}
+else{
+  console.log("keep trucking! ")
+}
 
 
 
