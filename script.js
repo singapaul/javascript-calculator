@@ -34,6 +34,16 @@ secondOperatorSwitch = false;
 
 // 2. Functions
 
+//Print calculation to the DOM function:
+const printCalculation = () => {
+  printToScreen.innerHTML = num1 + operator + num2;
+};
+// Print result to the DOM function: 
+const printResult = () => {
+  resultToScreen.innerHTML = product
+}
+
+// number press function 
 const numberButtonClick = (evnt) => {
 
   let inputNum = (evnt.target.innerText);
@@ -43,12 +53,13 @@ const numberButtonClick = (evnt) => {
   if (operator == "" && Continueflag == false) {
     console.log("on num1 path")
     num1 += inputNum;
-    printToScreen.innerHTML = num1;
+    printCalculation();
     console.log(`we have assigned num1 the value of ${num1}`);
     //case 2. Num1 has value, operator has value, put num2 in
   } else if (operator !== "" && num1 !== "" && Continueflag == false) {
     num2 += inputNum;
-    printToScreen.innerHTML = num1 + operator + num2;
+    printCalculation();
+    // printToScreen.innerHTML = num1 + operator + num2;
     console.log(`we have assigned num2 the value of ${num2}`);
     // case 3. num 1 and num2 unassigned dont print operator (might need to add a flag in later)
   } else if (operator !== "" && num1 == "" && num2 == "" && Continueflag == false) {
@@ -63,59 +74,55 @@ const numberButtonClick = (evnt) => {
   //case 5. we are continuining after initial calculation, num1 is assigned value of product, num2 = blank, operator is full, continue flag is true;
   else if (num1 !== "" && secondOperatorSwitch == false && operator !== "" && Continueflag == true) {
     console.log("scenario 5");
-    num2+=inputNum;
+    num2 += inputNum;
     console.log(num2);
-    printToScreen.innerHTML+=num2;
-    console.log(num1,num2, operator, secondOperatorSwitch, Continueflag)
+    printCalculation()
+    console.log(num1, num2, operator, secondOperatorSwitch, Continueflag)
     // here we want to remove brackets and add them and reshow the display
     //will also need another flag here to show that operator is down
+  } else if (num1 !== "" && operator !== "" && product == ""){
+    console.log("think im nearly there")
+    num2+=inputNum;
+    console.log(num2);
+    printCalculation();
   }
+
 };
 
 // function for pressing an operator
 const operatorButtonClick = (evnt) => {
   operator = evnt.target.innerText;
   console.log(`You pressed ${operator} `);
-  // num1 = printToScreen.innerHTML;
-  // console.log(num1);
+
   console.log(num1, num2)
   console.log(Continueflag);
 
-  console.log(`the state of the continue flag is  ${Continueflag}`);
-  console.log(`the state of the operator switch is  ${secondOperatorSwitch}`)
 
   // We are assignign the operator a value here, so it will always have a value, however we can use our two switches
   // Scenario 1 num1 no value, num2 has no value (by extension) and we are not continuining from a previous sum
   if (num1 == "" && Continueflag == false) {
-    printToScreen.innerHTML = "";
-    console.log("scenario1")
+    // printToScreen.innerHTML = "";
+    console.error("can't enter operator without a number")
   }
   // Scenario 2 num 1 has a value, num2 has no value and we are not continuining from a previous sum
   else if (num1 !== "" && num2 == "" && Continueflag == false) {
     console.log("scenario2");
-    printToScreen.innerHTML = "";
-    printToScreen.innerHTML = num1 + operator;
+    printCalculation();
   }
-  //scenario 3
-  else if (num1 !== "" && num2 == "" && Continueflag == true &&secondOperatorSwitch==true) {
-    console.log("we are continuining down this line of logic");
-
-    printToScreen.innerHTML += operator;
-    console.log(secondOperatorSwitch);
-    secondOperatorSwitch = false;
-    console.log(secondOperatorSwitch);
-    console.log(Continueflag);
-    console.log(num1, num2, operator);
-
-  }
-  // else if (num1 !=="" && num2!=="" && product !==""){
-  //   printToScreen.innerHTML ="";
-  //   printToScreen.innerHTML = num1 + operator + num2+ operator;
-  // }
-  else {
+  // scenrio 3, num1 has val, num2 has val, operator blank, product blank
+  else if (num1 !== "" && num2 == "" && product == "") {
+    printCalculation();
+    console.log("is this happening?")
+  } else if (num1 !== "" && num2 !== "") {
+    console.log("diff case")
+    num2 = "";
+    printCalculation();
+  } else {
     console.log("edge case")
-  }
+  };
 };
+
+
 
 
 
@@ -128,32 +135,25 @@ const delButtonClick = () => {
     // This line removes the last value from num1, it redefines the string, from index 0 to 1 minus the final index
     num1 = num1.slice(0, -1);
     console.log(`The value of num1 is now ${num1}`);
-    printToScreen.innerHTML = num1;
+    printCalculation()
+
     // scenario 2. where num1 has value, num2 blank, operator has value 
   } else if (num1 !== "" && num2 == "" && operator !== "") {
-
     console.log(`The value of the operator is ${operator}`);
     operator = "";
     console.log(`The value of the operator is ${operator}`);
-    printToScreen.innerHTML = " ";
-    printToScreen.innerHTML = num1;
+    printCalculation();
     // scenario 3. where num1 has value, num2 has value operator has value
   } else if (num1 !== "" && num2 !== "" && operator !== "") {
     console.log(num2);
-    // number 
     num2 = num2.slice(0, -1);
     console.log(`The value of num2 is now ${num2}`);
-    printToScreen.innerHTML = " ";
-    printToScreen.innerHTML = num1 + operator + num2;
+    printCalculation()
   } else if (num1 === "" && operator === "" && num2 === "") {
     console.log("This button isn't doing anything")
     // easter egg
-    counter = counter + 1;
-    let counts = (counter.length);
-    if (counter.length > 10) {
-      alert(`stop trying to break me! You've pressed me ${counts} times!`);
-      counter = 0;
-    }
+    eggCounter();
+
   } else {
     console.log("Edge case please fix")
   }
@@ -170,74 +170,35 @@ const equalsButtonClick = (evnt) => {
   // if oprator = x, then num1 * num2, sum or total equals
 
   console.log(`your value of num1 is ${num1}, your value of num2 is ${num2}, your operator is ${operator}`);
-// Converting the strings to numbers
-  console.log(num1, num2, operator);
-  console.log(typeof (num1), typeof (num2), typeof (operator));
+  // Converting the strings to numbers
+
   num1 = parseFloat(num1);
-  console.log(typeof (num1));
   num2 = parseFloat(num2);
 
-// In the case I want to keep calculating, and I have entered = a second/third/fourth time, I want to output my result
-if (num1 !=="" && num2!=="" && operator!=="" && secondOperatorSwitch ==false && Continueflag==true){
-  console.log("HFEOIHHWEFOIHOEFHOEIFOWEIFHEFOIWEFEOW")
-  console.log(num1);
-  console.log(num2);
-  console.log(operator);
-}
-else{
-  console.log("keep trucking! ")
-}
+  // In the case I want to keep calculating, and I have entered = a second/third/fourth time, I want to output my result
+  if (num1 !== "" && num2 !== "" && operator !== "" && secondOperatorSwitch == false && Continueflag == true) {
+    console.log("HFEOIHHWEFOIHOEFHOEIFOWEIFHEFOIWEFEOW")
+    console.log(num1);
+    console.log(num2);
+    console.log(operator);
+    // change ouput (product to be at beginning)
 
+  } else {
+    console.log("keep trucking! ")
+  }
 
+  // Calculation 
 
-
-// Switch statement
-  const opt = operator;
-  switch (opt) {
-    case '+':
-      product = num1 + num2;
-      console.log(product);
-      // console.log(resultToScreen);
-      resultToScreen.innerHTML = product;
-      // return product;
-
-      break;
-    case '-':
-      product = num1 - num2;
-      console.log(product);
-      resultToScreen.innerHTML = product;
-      break;
-    case 'x':
-      product = num1 * num2;
-      console.log(product);
-      resultToScreen.innerHTML = product;
-      break;
-    case '/':
-      product = (num1 / num2);
-      console.log(product);
-      resultToScreen.innerHTML = product;
-      break;
-
-    case '%':
-      product = ((num1 / num2) * 100)
-      console.log(product);
-      resultToScreen.innerHTML = product;
-      break;
-
-    default:
-      console.log("result already computed")
-  };
-
+  product = mathOperation(operator, num1, num2);
+  printResult();
   // maybe I want to redefine these seperately
   num1 = product;
   Continueflag = true;
-  console.log(num1);
-  console.log(Continueflag);
   product = "";
-  num2 = ""
   operator = "";
+  // num2 = "";
   secondOperatorSwitch = true;
-
+  console.log(num1, num2, operator, product)
 };
 
 // function for reset 
@@ -255,10 +216,50 @@ const resetButtonClick = (evnt) => {
   Continueflag = false;
 
   console.log(num1, num2, operator);
-  printToScreen.innerHTML = " ";
-  resultToScreen.innerHTML = " ";
+  // printToScreen.innerHTML = " ";
+  // resultToScreen.innerHTML = " ";
+  printCalculation()
+  printResult()
+
 
 };
+
+// Math function 
+
+const mathOperation = (opt, num1, num2) => {
+
+  switch (opt) {
+    case '+':
+      return num1 + num2;
+    case '-':
+      return num1 - num2;
+    case 'x':
+      return num1 * num2;
+    case '/':
+      return product = (num1 / num2);
+    case '%':
+      return ((num1 / num2) * 100)
+    default:
+      // console.error turns up red in Chrome
+      console.error("Non compatible operator included");
+  }
+};
+
+
+// easter egg: 
+
+const eggCounter = () => {
+  console.log(counter);
+  if (counter > 10) {
+    console.log(("stop trying to break me! You've pressed me times!"));
+    counts = 0;
+  } else {
+    console.log("whatever")
+  }
+};
+
+
+
 
 
 // 3. Logic Execution 
@@ -289,12 +290,3 @@ resetButton.addEventListener("click", resetButtonClick);
 
 //logic for the delete button
 delButton.addEventListener("click", delButtonClick);
-
-// 1+2= 
-// 1-2 = 
-// * 
-// 5 (divide symbol)5 = 
-// 5 x 5 
-// 5/5
-
-// I need to define a new function which takes in a number
