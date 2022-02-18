@@ -1,12 +1,15 @@
+body{height: 90vh;}
+
+
 .calculator {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
-  width: 90vw;
-  max-width: 600px;
-  height: 90vh;
+  width: 80vw;
+  max-width: 400px;
+  height: 80vh;
   padding: 3%;
-  margin: 10% auto 10% auto;
+  margin: 5% auto 5% auto;
   justify-items: center;
   align-items: center;
   position: relative;
@@ -20,15 +23,15 @@
     justify-content: space-around;
     align-items: flex-end;
 
-   
+
   }
 
 
 
   &__button {
-    height: 8vh;
-    max-width: 8vh;
-    min-width: 8vh;
+    height: 6vh;
+    max-width: 6vh;
+    min-width: 6vh;
     border-radius: 50%;
     font-size: 1em;
     justify-content: center;
@@ -48,3 +51,36 @@
 // pick the fots 
 // pick the symbols
 // fix the sizes
+
+
+hr {
+  display: block;
+  height: 3px;
+  border: 0;
+  width: 90%;
+  margin: 0 auto;
+  border-top: 5px solid white;
+
+}
+
+.footer {
+
+  height: 5vh;
+
+  &-contents {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 10%;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+  }
+
+
+
+}
+
+a{text-decoration: none;
+color: white;
+padding:0 10px}

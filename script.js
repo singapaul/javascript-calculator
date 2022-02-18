@@ -25,8 +25,12 @@ let num2 = "";
 let operator = "";
 // product
 let product = "";
-// 
+// easter egg
 let counter = "";
+// continue calc flag: 
+let Continueflag = false;
+// switch for additional operator: 
+secondOperatorSwitch = false;
 
 // 2. Functions
 
@@ -38,15 +42,29 @@ const numberButtonClick = (evnt) => {
   let inputNum = (evnt.target.innerText);
   console.log(`The input pressed is ${inputNum}`);
   // don't want to do it in function due to scoping
-  if (operator == "") {
+
+  if (num1 !== "" && num2 == "" && operator !== "" && Continueflag == true) {
+    console.log("on the right path");
+    printToScreen.innerHTML += inputNum;
+    num2 = inputNum;
+    console.log(num1);
+    console.log(num2);
+    console.log(operator);
+  } else if (operator !== "" && num2 == "" && num1 !== "" && Continueflag == false) {
+    console.log("fixing the initial bug");
+    printToScreen.innerHTML += inputNum;
+    num2 = inputNum;
+
+  } else if (operator == "") {
     num1 += inputNum;
     printToScreen.innerHTML = num1;
     console.log(`we have assigned num1 the value of ${num1}`);
+  } else if (num1 == "", num2 !== "", operator !== "") {
+    resetButtonClick(evnt);
   } else {
     num2 += inputNum;
-    printToScreen.innerHTML += num2;
+    printToScreen.innerHTML = num1 + operator + num2;
     console.log(`we have assigned num2 the value of ${num2}`);
-
   }
 
 };
@@ -103,22 +121,42 @@ const operatorButtonClick = (evnt) => {
   console.log(`You pressed ${operator} `);
   // num1 = printToScreen.innerHTML;
   // console.log(num1);
-console.log(num1,num2)
-if(num1==""){
-  printToScreen.innerHTML = "";
+  console.log(num1, num2)
+  console.log(Continueflag);
+if (Continueflag == true){
+  secondOperatorSwitch = true
 }
-else if (num1 !=="" && num2 ==""){
-  printToScreen.innerHTML = "";
-  printToScreen.innerHTML = num1 + operator;
-}
-// else if (num1 !=="" && num2!=="" && product !==""){
-//   printToScreen.innerHTML ="";
-//   printToScreen.innerHTML = num1 + operator + num2+ operator;
-// }
-else {console.log("edge case")}
 
 
-  
+  if (num1 == "" && Continueflag == false) {
+    printToScreen.innerHTML = "";
+  } else if (num1 !== "" && num2 == "" && Continueflag == false) {
+    printToScreen.innerHTML = "";
+    printToScreen.innerHTML = num1 + operator;
+  } else if (Continueflag == true && secondOperatorSwitch ==true) {
+    console.log("HI THE flag worked");
+    console.log(`The value of num1 is ${num1}`);
+    console.log(`The value of num2 is ${num2}`);
+    console.log(`The value of product is ${product}`);
+    console.log(`The value of operator is ${operator}`);
+    printToScreen.innerHTML += operator;
+    secondOperatorSwitch = false; 
+
+
+
+
+
+  }
+  // else if (num1 !=="" && num2!=="" && product !==""){
+  //   printToScreen.innerHTML ="";
+  //   printToScreen.innerHTML = num1 + operator + num2+ operator;
+  // }
+  else {
+    console.log("edge case")
+  }
+
+
+
 
   // we use if statement here :
   // if operator is blank we won't use a switch statement, we will use IF logic 
@@ -175,7 +213,7 @@ const equalsButtonClick = (evnt) => {
     case '+':
       product = num1 + num2;
       console.log(product);
-      console.log(resultToScreen);
+      // console.log(resultToScreen);
       resultToScreen.innerHTML = product;
       // return product;
 
@@ -195,13 +233,24 @@ const equalsButtonClick = (evnt) => {
       console.log(product);
       resultToScreen.innerHTML = product;
       break;
+
+      case '%':
+      product = ((num1 / num2)*100)
+      console.log(product);
+      resultToScreen.innerHTML = product;
+      break;
+
     default:
-      alert("you done broke me now")
+      console.log("result already computed")
   };
 
-  num1 = "";
-  num2 = "";
+  // maybe I want to refine these seperately
+  num1 = product;
+  Continueflag = true;
+  console.log(num1);
+  console.log(Continueflag);
   product = "";
+  num2 = ""
   operator = "";
 
 };
@@ -217,6 +266,9 @@ const resetButtonClick = (evnt) => {
   operator = "";
   // product
   product = "";
+  // flag
+  Continueflag = false;
+
   console.log(num1, num2, operator);
   printToScreen.innerHTML = " ";
   resultToScreen.innerHTML = " ";
