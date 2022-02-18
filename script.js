@@ -14,6 +14,8 @@ const delButton = document.querySelector(".calculator__button--del");
 const printToScreen = document.querySelector("#calculator__screen-inputs");
 // output to result
 const resultToScreen = document.querySelector("#calculator__screen-result");
+// Decimal press
+const decimalPress = document.getElementById("decimal");
 
 
 // defining the variables 
@@ -31,6 +33,8 @@ let counter = "";
 let Continueflag = false;
 // switch for additional operator: 
 secondOperatorSwitch = false;
+// is decimal allowed? 
+let decimalAllowed = true;
 
 // 2. Functions
 
@@ -51,7 +55,18 @@ const numberButtonClick = (evnt) => {
 
   // case 1. No operator = blank, putting num1 in 
   if (operator == "" && Continueflag == false) {
-    console.log("on num1 path")
+    console.log("on num1 path");
+
+    // if there is a decimal point in the number, disbale that button/or not add the input, don need flags
+
+    const containsDecimal = inputNum.includes(".");
+
+    if (containsDecimal === true) {
+      decimalPress.disabled = true
+    } else {
+      decimalPress.disabled =false
+    };
+
     num1 += inputNum;
     printCalculation();
     console.log(`we have assigned num1 the value of ${num1}`);
@@ -61,7 +76,17 @@ const numberButtonClick = (evnt) => {
     printCalculation();
     // printToScreen.innerHTML = num1 + operator + num2;
     console.log(`we have assigned num2 the value of ${num2}`);
-    // case 3. num 1 and num2 unassigned dont print operator (might need to add a flag in later)
+      // if there is a decimal point in the number, disbale that button/or not add the input, don need flags
+
+      const containsDecimal = inputNum.includes(".");
+
+      if (containsDecimal === true) {
+        decimalPress.disabled = true
+      } else {
+        decimalPress.disabled =false
+      };
+
+
   } else if (operator !== "" && num1 == "" && num2 == "" && Continueflag == false) {
     resetButtonClick(evnt);
   }
@@ -80,9 +105,9 @@ const numberButtonClick = (evnt) => {
     console.log(num1, num2, operator, secondOperatorSwitch, Continueflag)
     // here we want to remove brackets and add them and reshow the display
     //will also need another flag here to show that operator is down
-  } else if (num1 !== "" && operator !== "" && product == ""){
+  } else if (num1 !== "" && operator !== "" && product == "") {
     console.log("think im nearly there")
-    num2+=inputNum;
+    num2 += inputNum;
     console.log(num2);
     printCalculation();
   }
@@ -121,9 +146,6 @@ const operatorButtonClick = (evnt) => {
     console.log("edge case")
   };
 };
-
-
-
 
 
 const delButtonClick = () => {
@@ -175,30 +197,24 @@ const equalsButtonClick = (evnt) => {
   num1 = parseFloat(num1);
   num2 = parseFloat(num2);
 
-  // In the case I want to keep calculating, and I have entered = a second/third/fourth time, I want to output my result
-  if (num1 !== "" && num2 !== "" && operator !== "" && secondOperatorSwitch == false && Continueflag == true) {
-    console.log("HFEOIHHWEFOIHOEFHOEIFOWEIFHEFOIWEFEOW")
-    console.log(num1);
-    console.log(num2);
-    console.log(operator);
-    // change ouput (product to be at beginning)
-
+  // We do our maths in an if statement to test if we are using actual numbers
+  if (isNaN(num1) || isNaN(num2)) {
+    console.error(`One or more of your values of the values is NaN, the value of num1 is ${num1} & the value of num2 is ${num2}`);
+    resetButtonClick(evnt);
   } else {
-    console.log("keep trucking! ")
+
+    // do maths 
+    product = mathOperation(operator, num1, num2);
+    printResult();
+    // maybe I want to redefine these seperately
+    num1 = product;
+    Continueflag = true;
+    product = "";
+    operator = "";
+    // num2 = "";
+    secondOperatorSwitch = true;
+    console.log(num1, num2, operator, product)
   }
-
-  // Calculation 
-
-  product = mathOperation(operator, num1, num2);
-  printResult();
-  // maybe I want to redefine these seperately
-  num1 = product;
-  Continueflag = true;
-  product = "";
-  operator = "";
-  // num2 = "";
-  secondOperatorSwitch = true;
-  console.log(num1, num2, operator, product)
 };
 
 // function for reset 
@@ -244,6 +260,18 @@ const mathOperation = (opt, num1, num2) => {
       console.error("Non compatible operator included");
   }
 };
+
+// function to test for decimals
+const containsDecimal = (inputNum) => {
+  inputNum.includes(".");
+
+  if (containsDecimal === true) {
+    decimalPress.disabled = true
+  } else {
+    decimalPress.disabled = false
+  }
+};
+
 
 
 // easter egg: 

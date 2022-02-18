@@ -24,16 +24,41 @@
 
 
 
-const eggCounter = () => {
-  let counts = 110;
-  counts = counts + 1;
-  if (counts > 10) {
-    console.log(("stop trying to break me! You've pressed me times!"));
-    counts = 0;
+// const eggCounter = () => {
+//   let counts = 110;
+//   counts = counts + 1;
+//   if (counts > 10) {
+//     console.log(("stop trying to break me! You've pressed me times!"));
+//     counts = 0;
+//   } else {
+//     console.log("whatever")
+//   }
+// };
+
+// eggCounter()
+// //console.log(eggCounter())
+
+
+
+// const isNanTest = (inputVar) =>{
+//   if (isNaN(inputVar)) {
+//     return false;
+//   }
+//   return true;
+// }
+
+// console.log(milliseconds('100F'));
+// expected output: "Not a Number!"
+
+
+const containsDecimal = (inputNum) => {
+  inputNum.includes(".");
+
+  if (containsDecimal === true) {
+    decimalPress.disabled = true
   } else {
-    console.log("whatever")
+    decimalPress.disabled = false
   }
 };
 
-eggCounter()
-//console.log(eggCounter())
+
