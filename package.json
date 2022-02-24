@@ -1,0 +1,24 @@
+{
+  "name": "javascript-calculator",
+  "version": "1.0.0",
+  "description": "A javascript calculator - nology week 3 challenge!",
+  "main": "sandbox.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "cypress": "cypress open"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/singapaul/javascript-calculator.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/singapaul/javascript-calculator/issues"
+  },
+  "homepage": "https://github.com/singapaul/javascript-calculator#readme",
+  "devDependencies": {
+    "cypress": "^9.5.0"
+  }
+}

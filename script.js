@@ -52,6 +52,7 @@ const numberButtonClick = (evnt) => {
 
   let inputNum = (evnt.target.innerText);
   console.log(`The input pressed is ${inputNum}`);
+  
 
   // case 1. No operator = blank, putting num1 in 
   if (operator == "" && Continueflag == false) {
@@ -252,7 +253,7 @@ const mathOperation = (opt, num1, num2) => {
     case 'x':
       return num1 * num2;
     case '/':
-      return product = (num1 / num2);
+      return num1 / num2;
     case '%':
       return ((num1 / num2) * 100)
     default:
