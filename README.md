@@ -1,5 +1,5 @@
 ## Javascript calculator
-
+## ![](./calculator.png)
 
 A calculator built using HTML, SASS and Javascript. This project was my first introduction to implementing JS on a web app. E2E testing was added to the project and was facilitated with the use of Cypress.
 
